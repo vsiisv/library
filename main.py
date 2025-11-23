@@ -6,6 +6,22 @@ def book_list_view(library):
         print("Нет книг в библиотеке.")
 
 
+def add_book(title, author, year):
+    if title in library:
+        print(f"Книга {title} уже есть в библиотеке. Обновить данные?")
+        if input("Да/нет: ") == "Да".lower():
+            library[title] = {"author": author, "year": year, "available": None}
+            print(f"Книга {title} обновлена.")
+        else:
+            print(f"Книга {title} не обновлена.")
+            return
+
+    else:
+        library[title] = {"author": author, "year": year, "available": None}
+        print(f"Книга {title} добавлена в библиотеку.")
+        return
+
+
 library = {
     "The Lord of the Rings": {
         "author": "J.R.R. Tolkien",
@@ -78,4 +94,17 @@ library = {
 }
 
 
-book_list_view(library)
+def main():
+    book_list_view(library)
+    print()
+    if input("Добавить новую книгу? (Да/нет): ") == "Да".lower():
+        title = input("Введите название книги: ")
+        author = input("Введите автора книги: ")
+        year = input("Введите год выхода книги: ")
+
+        add_book(title, author, year)
+    else:
+        print("Книга не добавлена.")
+
+
+main()
