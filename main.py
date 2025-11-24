@@ -7,17 +7,22 @@ def book_list_view(library):
 
 
 def add_book(title, author, year):
+    data = {
+        "author": author,
+        "year": year,
+        "available": None
+        }
     if title.lower() in [t.lower() for t in library]:
-        print(f'Книга "{title}" уже есть в библиотеке. Обновить данные?')
+        print(f"Книга \"{title}\" уже есть в библиотеке. Обновить данные?")
         if input("Да/нет: ").strip().lower() == "да":
-            library[title] = {"author": author, "year": year, "available": None}
-            print(f'Книга "{title}" обновлена.')
+            library[title] = data
+            print(f"Книга \"{title}\" обновлена.")
         else:
-            print(f'Книга "{title}" не обновлена.')
+            print(f"Книга \"{title}\" не обновлена.")
 
     else:
-        library[title] = {"author": author, "year": year, "available": None}
-        print(f'Книга "{title}" добавлена в библиотеку.')
+        library[title] = data
+        print(f"Книга \"{title}\" добавлена в библиотеку.")
 
 
 def main():
@@ -31,7 +36,8 @@ def main():
                 add_book(title, author, year)
                 break
             except ValueError:
-                print("Введите год выхода книги в формате целых чисел. Например: 1990")
+                print("Введите год выхода книги в \
+                    формате целых чисел. Например: 1990")
 
     else:
         print("Книга не добавлена.")
@@ -44,13 +50,21 @@ library = {
         "available": True,
     },
     "1984": {"author": "George Orwell", "year": 1949, "available": True},
-    "Moby Dick": {"author": "Herman Melville", "year": 1851, "available": False},
+    "Moby Dick": {
+        "author": "Herman Melville",
+        "year": 1851,
+        "available": False
+        },
     "Harry Potter and the Philosopher's Stone": {
         "author": "J.K. Rowling",
         "year": 1997,
         "available": True,
     },
-    "The Dark Tower": {"author": "Stephen King", "year": 1989, "available": True},
+    "The Dark Tower": {
+        "author": "Stephen King",
+        "year": 1989,
+        "available": True
+        },
 }
 
 
